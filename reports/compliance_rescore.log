@@ -150,3 +150,62 @@ Rescoring: 1,490,000 S1, 34,494,903 candidates, 1672.4 S1/s
 Rescoring: 1,500,000 S1, 34,726,045 candidates, 1668.1 S1/s
 Rescoring: 1,510,000 S1, 34,956,979 candidates, 1669.9 S1/s
 Rescoring: 1,520,000 S1, 35,188,304 candidates, 1672.4 S1/s
+Rescoring: 1,530,000 S1, 35,419,458 candidates, 1673.6 S1/s
+Rescoring: 1,540,000 S1, 35,651,209 candidates, 1676.2 S1/s
+Rescoring: 1,550,000 S1, 35,882,548 candidates, 1675.9 S1/s
+Rescoring: 1,560,000 S1, 36,113,358 candidates, 1663.8 S1/s
+Rescoring: 1,570,000 S1, 36,345,082 candidates, 1659.2 S1/s
+Rescoring: 1,580,000 S1, 36,576,724 candidates, 1662.1 S1/s
+Rescoring: 1,590,000 S1, 36,808,088 candidates, 1663.5 S1/s
+Rescoring: 1,600,000 S1, 37,039,174 candidates, 1664.1 S1/s
+Rescoring: 1,610,000 S1, 37,270,131 candidates, 1666.6 S1/s
+Rescoring: 1,620,000 S1, 37,502,270 candidates, 1668.3 S1/s
+Rescoring: 1,630,000 S1, 37,733,600 candidates, 1669.4 S1/s
+Rescoring: 1,640,000 S1, 37,965,476 candidates, 1671.4 S1/s
+Rescoring: 1,650,000 S1, 38,195,800 candidates, 1672.2 S1/s
+Rescoring: 1,660,000 S1, 38,427,949 candidates, 1673.5 S1/s
+Rescoring: 1,670,000 S1, 38,659,718 candidates, 1674.8 S1/s
+Rescoring: 1,680,000 S1, 38,891,289 candidates, 1666.7 S1/s
+Rescoring: 1,690,000 S1, 39,123,000 candidates, 1668.1 S1/s
+Rescoring: 1,700,000 S1, 39,354,445 candidates, 1666.5 S1/s
+Rescoring: 1,710,000 S1, 39,585,720 candidates, 1665.4 S1/s
+Rescoring: 1,720,000 S1, 39,816,567 candidates, 1665.6 S1/s
+Rescoring: 1,730,000 S1, 40,047,865 candidates, 1666.4 S1/s
+{
+  "signature": {
+    "inputs": {
+      "version": 1,
+      "files": [
+        {
+          "path": "D:\\amazon_ml_challenge\\dataset\\test\\test_source1.tsv",
+          "size": 175022086,
+          "mtime_ns": 1789735670000000000
+        },
+        {
+          "path": "D:\\amazon_ml_challenge\\dataset\\test\\test_source2.tsv",
+          "size": 509456422,
+          "mtime_ns": 1789735670000000000
+        },
+        {
+          "path": "D:\\amazon_ml_challenge\\dataset\\test\\test_source3.tsv",
+          "size": 506002772,
+          "mtime_ns": 1789735671000000000
+        }
+      ]
+    },
+    "model_sha256": "5499a27a023d5cd727f04c18b3efcbec389fd8bee4629d10ec15e68d55e90c38",
+    "pipeline_sha256": {
+      "normalization.py": "441e9ab68cfbe8f80e1d36399395ff2395a8cd0425ab4639adcff92331624c5f",
+      "retrieval.py": "99dc2e25baad38f9187f710664eafb142c028966f38c608047c86727a899ce08",
+      "features.py": "53cf51e7f18e0e025daff0bade0c7c449da62b0b3a75f67090038de23ff99dfc",
+      "inference.py": "fe56efa90ba56839f65045e19ef1785cb9d32f61ed17bf246c830d89f37bd189",
+      "rescore.py": "a99c99371ab7711ecd556234cff29c845acd5ef0fd5b76980e538bd54e356d4a"
+    },
+    "candidate_cache_sha256": "950d762c34214149adb9c32294a054bdee5b9788278beb21b69d8fbb574c2513",
+    "fresh_retrieval_audit_s1": 64
+  },
+  "s1_rows": 1732544,
+  "predicted_pairs": 5134678,
+  "empty_matches": 142107,
+  "candidate_pairs": 40106707
+}

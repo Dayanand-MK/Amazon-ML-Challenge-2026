@@ -1,9 +1,52 @@
 {
   "local_integrity": "PASS",
-  "official_validator": "NOT AVAILABLE",
-  "schema": "matching mirrors supplied training truth; candidates are long-form S1,target pairs",
+  "official_validator": "PASS",
+  "schema": "one row per S1; comma-separated target lists; exact challenge headers",
+  "output_sha256": {
+    "matching_results.tsv": "37720af841c29b76002fa35cf734bd66281f033496e2e169c8191efbc712dcb8",
+    "candidate_pairs.tsv": "a314ba2cfc9e6fec44cb89d35525c15388dc0bdfeb3af94ae9c61142b3b7fba8"
+  },
   "s1_rows": 1732544,
+  "candidate_rows": 1732544,
   "candidate_pairs": 40106707,
-  "predicted_pairs": 4950360,
-  "empty_matches": 152975
+  "predicted_pairs": 5134678,
+  "empty_matches": 142107,
+  "empty_candidates": 516,
+  "max_candidates": 24,
+  "average_candidates_per_s1": 23.14902651822984,
+  "inference_signature": {
+    "inputs": {
+      "version": 1,
+      "files": [
+        {
+          "path": "D:\\amazon_ml_challenge\\dataset\\test\\test_source1.tsv",
+          "size": 175022086,
+          "mtime_ns": 1789735670000000000
+        },
+        {
+          "path": "D:\\amazon_ml_challenge\\dataset\\test\\test_source2.tsv",
+          "size": 509456422,
+          "mtime_ns": 1789735670000000000
+        },
+        {
+          "path": "D:\\amazon_ml_challenge\\dataset\\test\\test_source3.tsv",
+          "size": 506002772,
+          "mtime_ns": 1789735671000000000
+        }
+      ]
+    },
+    "model_sha256": "5499a27a023d5cd727f04c18b3efcbec389fd8bee4629d10ec15e68d55e90c38",
+    "pipeline_sha256": {
+      "normalization.py": "441e9ab68cfbe8f80e1d36399395ff2395a8cd0425ab4639adcff92331624c5f",
+      "retrieval.py": "99dc2e25baad38f9187f710664eafb142c028966f38c608047c86727a899ce08",
+      "features.py": "53cf51e7f18e0e025daff0bade0c7c449da62b0b3a75f67090038de23ff99dfc",
+      "inference.py": "fe56efa90ba56839f65045e19ef1785cb9d32f61ed17bf246c830d89f37bd189",
+      "rescore.py": "a99c99371ab7711ecd556234cff29c845acd5ef0fd5b76980e538bd54e356d4a"
+    },
+    "candidate_cache_sha256": "950d762c34214149adb9c32294a054bdee5b9788278beb21b69d8fbb574c2513",
+    "fresh_retrieval_audit_s1": 64
+  },
+  "official_check_ids": true,
+  "official_validator_sha256": "f96f59934383a15095914f507620c078c474e8f9c60e864b2d051ed173a22dfc",
+  "official_exit_code": 0
 }

@@ -1,23 +1,26 @@
 # Final measured results
 
-Model: hist_gradient_boosting. Features: 30. Threshold: 0.800.
+Selected model: lightgbm_31; MIT license; threshold 0.750.
+240 trees, 14,640 nodes; conservative tree-parameter bound 468,480, below 8 billion.
 
 | Metric | Held-out evaluation |
 |---|---:|
-| candidate_recall | 0.862289 |
-| precision | 0.986011 |
-| recall | 0.753965 |
-| F0.5 | 0.928838 |
-| singleton_accuracy | 0.962121 |
+| Macro per-S1 F0.5 (challenge metric) | 0.891918 |
+| Micro F0.5 (diagnostic only) | 0.930619 |
+| Pooled pair precision | 0.980943 |
+| Pooled pair recall | 0.772163 |
+| Pair candidate recall | 0.862289 |
+| Zero-match S1 accuracy | 0.962121 |
 
-Sampled S1: 12000; fit 7265; tune 2376; held-out evaluation 2359.
-Sampled S1s sharing a truth target are grouped before splitting. Candidates search the full training target corpus.
-The model is retained exactly as evaluated, with no post-threshold refit. No test labels or external business data were used.
+Sample: 12,000 S1s; fit 7,265, tune 2,376, held-out 2,359.
+F0.5 is averaged over individual S1 entities, with 1 for a correctly empty singleton and 0 for a singleton false merge.
+Model/threshold/retrieval decisions use tuning data. Held-out results are reporting only; this split was also evaluated during earlier development, so it is not a fresh blind benchmark.
 
-Local integrity validator: PASS. Official validator: unavailable and NOT run.
-Test S1 rows: 1,732,544; candidate pairs: 40,106,707; predicted pairs: 4,950,360; empty lists: 152,975.
+Official validator: PASS, ID existence check enabled: True.
+Strict streaming validation: PASS. Both outputs have 1,732,544 S1 rows.
+Candidate pairs: 40,106,707; predicted pairs: 5,134,678; empty matches: 142,107.
+Average candidates/S1: 23.149027; maximum: 24.
+Candidates are precisely those passed to the model; matching lists are subsets. SHA-256 hashes bind validation to these files.
 
-Candidate generation uses auxiliary transliteration, exact/core names, token/prefix postings and address/number keys across countries.
-Postings larger than 1200 are skipped, 80 targets per source (160 total) are pre-ranked, and the best 24 reach the matcher per S1. These limits are included in the reported candidate recall.
-
-Archive: Hacksmiths_submission.zip. Official schema and model/license constraints remain unverified because their documents were not supplied.
+Earlier pooled scores and long-form output are superseded. Local backups remain under reports/history/pre_compliance and output/history.
+No test score is claimed; only the portal can score hidden test labels.

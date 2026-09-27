@@ -1,0 +1,26 @@
+{
+  "local_integrity": "PASS",
+  "official_validator": "NOT RUN",
+  "schema": "one row per S1; comma-separated target lists; exact challenge headers",
+  "output_sha256": {
+    "matching_results.tsv": "37720af841c29b76002fa35cf734bd66281f033496e2e169c8191efbc712dcb8",
+    "candidate_pairs.tsv": "a314ba2cfc9e6fec44cb89d35525c15388dc0bdfeb3af94ae9c61142b3b7fba8"
+  },
+  "s1_rows": 1732544,
+  "candidate_rows": 1732544,
+  "candidate_pairs": 40106707,
+  "predicted_pairs": 5134678,
+  "empty_matches": 142107,
+  "empty_candidates": 516,
+  "max_candidates": 24,
+  "average_candidates_per_s1": 23.14902651822984
+}
+ML Challenge 2026 — submission validator
+  test dir: D:\amazon_ml_challenge\dataset\test
+  required S1 entities: 1732544
+  valid S2/S3 match IDs: 9969589
+  matching_results.tsv: 1732544 rows (142107 empty, 1590437 non-empty).
+  candidate_pairs.tsv: 1732544 rows (516 empty, 1732028 non-empty).
+
+PASS — no blocking issues found. Safe to submit.
+
