@@ -3,7 +3,7 @@ import pandas as pd
 
 # Production retrieval is disk-backed to support the full multi-million-row corpus.
 # The original dataframe helpers below are retained for existing notebooks only.
-# They hard-filter by country and should not be used for final inference.
+# Country keys are excluded from joins; use bounded retrieval for full inference.
 from .retrieval import CandidateIndex, build_index, blocking_keys
 
 
@@ -65,7 +65,7 @@ def make_name_last_key(text):
 def make_name_length_key(text):
     """
     Number of tokens in the business name.
-    Used together with country and another key.
+    Used together with another textual key.
     """
     tokens = get_tokens(text)
 
@@ -191,8 +191,12 @@ def generate_candidates(
     blocking_columns,
 ):
     """
-    Generate candidate pairs using arbitrary blocking columns.
+    Generate candidates using non-country blocking columns (small samples only).
     """
+
+    blocking_columns = [c for c in blocking_columns if c not in ("country", "country_normalized", "country_block_key")]
+    if not blocking_columns:
+        raise ValueError("At least one non-country blocking key is required")
 
     left_columns = [
         "entity_id",
@@ -239,17 +243,17 @@ def generate_all_candidates(source1, source2):
     """
 
     strategies = [
-        ["country_block_key", "name_block_key"],
+        ["name_block_key"],
 
-        ["country_block_key", "name_first_key"],
+        ["name_first_key"],
 
-        ["country_block_key", "name_last_key"],
+        ["name_last_key"],
 
-        ["country_block_key", "address_block_key"],
+        ["address_block_key"],
 
-        ["country_block_key", "address_first_key"],
+        ["address_first_key"],
 
-        ["country_block_key", "address_last_key"],
+        ["address_last_key"],
     ]
 
     all_candidates = []
@@ -288,7 +292,6 @@ def generate_candidates_by_name(source1, source2):
         source1,
         source2,
         [
-            "country_block_key",
             "name_block_key",
         ],
     )
@@ -299,7 +302,6 @@ def generate_candidates_by_address(source1, source2):
         source1,
         source2,
         [
-            "country_block_key",
             "address_block_key",
         ],
     )

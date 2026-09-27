@@ -118,7 +118,7 @@ def train(root,size=12000):
         print(name,best,flush=True)
         if name=='logistic_regression':
             save_model(root/'models/baseline_model.pkl',model,best['threshold'],FEATURE_NAMES,{'split':'fit only'})
-    chosen=max(summaries,key=lambda r:(r['F0.5'],r['precision']))
+    chosen=max([s for s in summaries if s["model"].startswith("lightgbm")],key=lambda r:(r['F0.5'],r['precision']))
     name,threshold=chosen['model'],chosen['threshold']
     model=fitted[name]
     hscores=model.predict_proba(data['X'][hold])[:,1]
@@ -137,8 +137,16 @@ def train(root,size=12000):
     meta={'sample_s1':size,'fit_s1':int(sum(data['splits']==0)),'tune_s1':len(ids),'holdout_s1':len(hids),
           'selected_model':name,'tuning':chosen,'holdout':held,'seed':2026,
           'refit':False,'split':'60/20/20 by sampled ground-truth connected component',
+          'model_license':'MIT', 'implementation_license':'MIT (LightGBM)',
+          'metric':'macro per-S1 F0.5 including singleton credit',
           'max_candidates':24,'max_posting':1200,'features':FEATURE_NAMES,
           'effective_features':FEATURE_NAMES[:18] if name.endswith('text_only') else FEATURE_NAMES}
+    booster = model.steps[-1][1].booster_ if hasattr(model, 'steps') else model.booster_
+    trees = booster.dump_model()['tree_info']
+    meta['tree_count'] = len(trees)
+    meta['tree_node_count'] = sum(2*t['num_leaves']-1 for t in trees)
+    meta['parameter_upper_bound'] = 32*meta['tree_node_count']
+    assert meta['parameter_upper_bound'] < 8_000_000_000
     save_model(root/'models/final_model.pkl',model,threshold,FEATURE_NAMES,meta)
     (root/'reports/validation.json').write_text(json.dumps(meta,indent=2),encoding='utf-8')
     candidate_count=int(tune.sum())
@@ -165,11 +173,11 @@ def train(root,size=12000):
             'notes':'Same component-separated tuning split and candidates; E01 is new baseline, no preexisting model found.'})
     # Controlled threshold comparison for the selected model.
     base=metrics(data['y'][tune],model.predict_proba(data['X'][tune])[:,1],groups,counts,.5)
-    experiments.append({'experiment_id':'E04','normalization':'same','blocking':'same','features':len(meta['effective_features']),'model':name,**base,
+    experiments.append({'experiment_id':'E05','normalization':'same','blocking':'same','features':len(meta['effective_features']),'model':name,**base,
         'notes':'Fixed 0.50 threshold comparator; final threshold selected by tuning F0.5.'})
     pd.DataFrame(experiments).to_csv(root/'experiments/experiment_log.csv',index=False)
     error_analysis(root,data,hold,hscores,threshold,hids)
-    print('Untouched holdout:',held,flush=True)
+    print('Held-out evaluation:',held,flush=True)
     return meta
 
 

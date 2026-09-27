@@ -1,0 +1,95 @@
+Training features: 500/12,000, 20s
+Training features: 1,000/12,000, 33s
+Training features: 1,500/12,000, 46s
+Training features: 2,000/12,000, 57s
+Training features: 2,500/12,000, 68s
+Training features: 3,000/12,000, 82s
+Training features: 3,500/12,000, 97s
+Training features: 4,000/12,000, 110s
+Training features: 4,500/12,000, 123s
+Training features: 5,000/12,000, 138s
+Training features: 5,500/12,000, 151s
+Training features: 6,000/12,000, 163s
+Training features: 6,500/12,000, 175s
+Training features: 7,000/12,000, 186s
+Training features: 7,500/12,000, 196s
+Training features: 8,000/12,000, 207s
+Training features: 8,500/12,000, 216s
+Training features: 9,000/12,000, 228s
+Training features: 9,500/12,000, 241s
+Training features: 10,000/12,000, 251s
+Training features: 10,500/12,000, 261s
+Training features: 11,000/12,000, 270s
+Training features: 11,500/12,000, 279s
+Training features: 12,000/12,000, 288s
+Fitting logistic_regression
+logistic_regression {'threshold': 0.6000000000000002, 'precision': 0.9284943750963168, 'recall': 0.743368291178285, 'F0.5': 0.8382116864987845, 'macro_F0.5': 0.8382116864987845, 'micro_F0.5': 0.8844426176565574, 'true_positives': 6025, 'false_positives': 464, 'false_negatives': 2080, 'candidate_recall': 0.8421961752004935, 'singleton_accuracy': 0.821656050955414, 'singleton_count': 157, 'true_pairs': 8105, 'candidate_count': 54515, 's1_count': 2376, 'model': 'logistic_regression'}
+Fitting lightgbm_15
+D:\amazon_ml_challenge\.venv\Lib\site-packages\sklearn\utils\validation.py:2830: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+lightgbm_15 {'threshold': 0.7250000000000003, 'precision': 0.97744, 'recall': 0.7537322640345466, 'F0.5': 0.880858311880261, 'macro_F0.5': 0.880858311880261, 'micro_F0.5': 0.9226702914967527, 'true_positives': 6109, 'false_positives': 141, 'false_negatives': 1996, 'candidate_recall': 0.8421961752004935, 'singleton_accuracy': 0.9617834394904459, 'singleton_count': 157, 'true_pairs': 8105, 'candidate_count': 54515, 's1_count': 2376, 'model': 'lightgbm_15'}
+Fitting lightgbm_31
+D:\amazon_ml_challenge\.venv\Lib\site-packages\sklearn\utils\validation.py:2830: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+lightgbm_31 {'threshold': 0.7000000000000003, 'precision': 0.9748901443816698, 'recall': 0.7664404688463912, 'F0.5': 0.8854413920915728, 'macro_F0.5': 0.8854413920915728, 'micro_F0.5': 0.9245973863602536, 'true_positives': 6212, 'false_positives': 160, 'false_negatives': 1893, 'candidate_recall': 0.8421961752004935, 'singleton_accuracy': 0.9554140127388535, 'singleton_count': 157, 'true_pairs': 8105, 'candidate_count': 54515, 's1_count': 2376, 'model': 'lightgbm_31'}
+Fitting lightgbm_text_only
+D:\amazon_ml_challenge\.venv\Lib\site-packages\sklearn\utils\validation.py:2830: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+lightgbm_text_only {'threshold': 0.6250000000000002, 'precision': 0.931704260651629, 'recall': 0.7338679827267119, 'F0.5': 0.8432171428618538, 'macro_F0.5': 0.8432171428618538, 'micro_F0.5': 0.8840403079575518, 'true_positives': 5948, 'false_positives': 436, 'false_negatives': 2157, 'candidate_recall': 0.8421961752004935, 'singleton_accuracy': 0.8343949044585988, 'singleton_count': 157, 'true_pairs': 8105, 'candidate_count': 54515, 's1_count': 2376, 'model': 'lightgbm_text_only'}
+D:\amazon_ml_challenge\.venv\Lib\site-packages\sklearn\utils\validation.py:2830: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+D:\amazon_ml_challenge\.venv\Lib\site-packages\sklearn\utils\validation.py:2830: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+Held-out evaluation: {'threshold': 0.7000000000000003, 'precision': 0.9761904761904762, 'recall': 0.7713021025451863, 'F0.5': 0.8884358589749788, 'macro_F0.5': 0.8884358589749788, 'micro_F0.5': 0.9269438780033691, 'true_positives': 6273, 'false_positives': 153, 'false_negatives': 1860, 'candidate_recall': 0.8504856756424444, 'singleton_accuracy': 0.9393939393939394, 'singleton_count': 132, 'true_pairs': 8133, 'candidate_count': 53712, 's1_count': 2359}
+Balanced experiment: 500/2376, 17s
+Balanced experiment: 1000/2376, 35s
+Balanced experiment: 1500/2376, 51s
+Balanced experiment: 2000/2376, 69s
+D:\amazon_ml_challenge\.venv\Lib\site-packages\sklearn\utils\validation.py:2830: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+{
+  "baseline": {
+    "threshold": 0.7000000000000003,
+    "precision": 0.9748901443816698,
+    "recall": 0.7664404688463912,
+    "F0.5": 0.8854413920915728,
+    "macro_F0.5": 0.8854413920915728,
+    "micro_F0.5": 0.9245973863602536,
+    "true_positives": 6212,
+    "false_positives": 160,
+    "false_negatives": 1893,
+    "candidate_recall": 0.8421961752004935,
+    "singleton_accuracy": 0.9554140127388535,
+    "singleton_count": 157,
+    "true_pairs": 8105,
+    "candidate_count": 54515,
+    "s1_count": 2376,
+    "model": "lightgbm_31"
+  },
+  "balanced": {
+    "threshold": 0.7500000000000002,
+    "precision": 0.9792060491493384,
+    "recall": 0.7669339913633559,
+    "F0.5": 0.8887482590909027,
+    "macro_F0.5": 0.8887482590909027,
+    "micro_F0.5": 0.9278442845627967,
+    "true_positives": 6216,
+    "false_positives": 132,
+    "false_negatives": 1889,
+    "candidate_recall": 0.8531770512029612,
+    "singleton_accuracy": 0.9681528662420382,
+    "singleton_count": 157,
+    "true_pairs": 8105,
+    "candidate_count": 54515,
+    "s1_count": 2376
+  },
+  "F0.5_gain": 0.003306866999329916,
+  "selection_split": "tuning only; existing frozen model; same keys, posting cap and final 24-candidate cap"
+}
+Selected retrieval holdout: 500
+Selected retrieval holdout: 1000
+Selected retrieval holdout: 1500
+Selected retrieval holdout: 2000
+D:\amazon_ml_challenge\.venv\Lib\site-packages\sklearn\utils\validation.py:2830: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+Selected balanced holdout: {'threshold': 0.7500000000000002, 'precision': 0.9809434551702593, 'recall': 0.772162793557113, 'F0.5': 0.8919178942537307, 'macro_F0.5': 0.8919178942537307, 'micro_F0.5': 0.9306185353131206, 'true_positives': 6280, 'false_positives': 122, 'false_negatives': 1853, 'candidate_recall': 0.8622894380917251, 'singleton_accuracy': 0.9621212121212122, 'singleton_count': 132, 'true_pairs': 8133, 'candidate_count': 53712, 's1_count': 2359}

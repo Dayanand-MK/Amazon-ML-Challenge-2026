@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "refit_from_cached_training_features_identical": true,
+  "booster_sha256": "7ccda191be997490a4e670f6ba0556e345752c00856e7869835a73d6a3348c7f",
+  "seed": 2026,
+  "training_s1": 7265,
+  "sample_truth_targets_unique": true
+}

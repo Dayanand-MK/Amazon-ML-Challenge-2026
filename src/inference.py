@@ -18,6 +18,8 @@ _BUNDLE = None
 
 def worker_init(root):
     global _INDEX, _BUNDLE
+    import warnings
+    warnings.filterwarnings("ignore", message="X does not have valid feature names, but LGBMClassifier was fitted with feature names", category=UserWarning)
     root=Path(root)
     _BUNDLE=load_model(root/'models/final_model.pkl')
     assert _BUNDLE['feature_names']==FEATURE_NAMES
@@ -26,13 +28,14 @@ def worker_init(root):
         balance_sources=_BUNDLE['metadata'].get('source_balanced',False))
 
 
-def process_batch(rows):
+def process_batch(rows, candidate_rids=None):
     import numpy as np
     _INDEX.try_prepared()
     candidates,matrices=[],[]
-    for row in rows:
+    for position,row in enumerate(rows):
         left=prepared(row)
-        rights=[_INDEX.record(r) for r in _INDEX.retrieve(left)]
+        rids = _INDEX.retrieve(left) if candidate_rids is None else candidate_rids[position]
+        rights=[_INDEX.record(r) for r in rids]
         candidates.append([r[0] for r in rights])
         matrices.append(feature_matrix(left,rights))
     x=np.concatenate(matrices)
@@ -44,7 +47,7 @@ def process_batch(rows):
     for row,targets in zip(rows,candidates):
         selected=sorted(t for t,s in zip(targets,scores[pos:pos+len(targets)]) if s>=_BUNDLE['threshold'])
         match_lines.append(row[0]+'\t'+','.join(selected)+'\n')
-        candidate_lines.extend(row[0]+'\t'+t+'\n' for t in sorted(targets))
+        candidate_lines.append(row[0]+'\t'+','.join(sorted(targets))+'\n')
         pos+=len(targets)
         matched+=len(selected)
         empty+=not selected
@@ -91,7 +94,7 @@ def infer(root,workers=3,batch_size=500):
     else:
         mf,cf=mpath.open('wb'),cpath.open('wb')
         mf.write(b'source1_entity_id\tmatched_entity_ids\n')
-        cf.write(b'source1_entity_id\ttarget_entity_id\n')
+        cf.write(b'source1_entity_id\tcandidate_entity_ids\n')
     start=time.time()
     initial=state['s1_rows']
     for var in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS'):

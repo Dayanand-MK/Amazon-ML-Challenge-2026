@@ -1,0 +1,17 @@
+{
+  "fresh_s1_rows": 242000,
+  "fresh_candidate_pairs": 5600829,
+  "files": {
+    "matching_results": {
+      "bytes_compared": 12408560,
+      "sha256": "3ec04ab490dd67e19aed2e3b9ca2a174e0e7fae36008bf901c3c6a5709b8317f",
+      "equal": true
+    },
+    "candidate_pairs": {
+      "bytes_compared": 75310147,
+      "sha256": "90fd006a2c19f9dd53f976b10082e5267a247a120654f1321d35b63c67f466d5",
+      "equal": true
+    }
+  },
+  "status": "PASS"
+}

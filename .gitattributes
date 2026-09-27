@@ -1,0 +1,2 @@
+utils/validate_submission.py -text
+*.pkl binary

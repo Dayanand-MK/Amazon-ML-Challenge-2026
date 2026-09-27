@@ -1,0 +1,68 @@
+Index complete: 2 targets
+{
+  "local_integrity": "PASS",
+  "official_validator": "NOT RUN",
+  "schema": "one row per S1; comma-separated target lists; exact challenge headers",
+  "output_sha256": {
+    "matching_results.tsv": "e35062f37f5cf365734720d01c35ea81ffd3a4043b8b243a2379d4c7b783bcaa",
+    "candidate_pairs.tsv": "b38c730baa576c4ad950b6c8b048964a77b56aa1917879f81cff6cd90d984123"
+  },
+  "s1_rows": 2,
+  "candidate_rows": 2,
+  "candidate_pairs": 1,
+  "predicted_pairs": 1,
+  "empty_matches": 1,
+  "empty_candidates": 1,
+  "max_candidates": 1,
+  "average_candidates_per_s1": 0.5
+}
+Reusing completed inference
+test_batched_inference_end_to_end (test_pipeline.PipelineTests.test_batched_inference_end_to_end) ... ok
+Index complete: 2 targets
+{
+  "local_integrity": "PASS",
+  "official_validator": "NOT RUN",
+  "schema": "one row per S1; comma-separated target lists; exact challenge headers",
+  "output_sha256": {
+    "matching.tsv": "846c0ff97cf2ad67f62f9f72077e496ee68f157dd185b251ea6bd27e72de9e87",
+    "candidate.tsv": "09274671d2b679d920dcd87da2d70bdcd246811d1a37330f6f92c37042223698"
+  },
+  "s1_rows": 2,
+  "candidate_rows": 2,
+  "candidate_pairs": 1,
+  "predicted_pairs": 1,
+  "empty_matches": 1,
+  "empty_candidates": 1,
+  "max_candidates": 1,
+  "average_candidates_per_s1": 0.5
+}
+test_cross_country_retrieval_and_submission (test_pipeline.PipelineTests.test_cross_country_retrieval_and_submission) ... ok
+test_legacy_helpers_do_not_hard_filter_country (test_pipeline.PipelineTests.test_legacy_helpers_do_not_hard_filter_country) ... ok
+test_lost_truth_counts_as_false_negative (test_pipeline.PipelineTests.test_lost_truth_counts_as_false_negative) ... ok
+test_macro_gives_each_entity_equal_weight (test_pipeline.PipelineTests.test_macro_gives_each_entity_equal_weight) ... ok
+test_missing_does_not_match (test_pipeline.PipelineTests.test_missing_does_not_match) ... ok
+test_official_validator_accepts_grouped_files_and_rejects_unknown_ids (test_pipeline.PipelineTests.test_official_validator_accepts_grouped_files_and_rejects_unknown_ids) ... ok
+test_unicode_marks_preserved (test_pipeline.PipelineTests.test_unicode_marks_preserved) ... ok
+{
+  "local_integrity": "PASS",
+  "official_validator": "NOT RUN",
+  "schema": "one row per S1; comma-separated target lists; exact challenge headers",
+  "output_sha256": {
+    "matching.tsv": "bb02f2caaeb536fe9603fff03f1b653f821b045fd7e99fa6979e5425f5b72cc1",
+    "candidate.tsv": "d347eead6b90c26617e5718934cd309710593b4c798a413bbc9aa350c4a15f75"
+  },
+  "s1_rows": 1,
+  "candidate_rows": 1,
+  "candidate_pairs": 1,
+  "predicted_pairs": 1,
+  "empty_matches": 0,
+  "empty_candidates": 0,
+  "max_candidates": 1,
+  "average_candidates_per_s1": 1.0
+}
+test_validator_rejects_invalid_outputs_and_preserves_opaque_ids (test_pipeline.PipelineTests.test_validator_rejects_invalid_outputs_and_preserves_opaque_ids) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 5.508s
+
+OK

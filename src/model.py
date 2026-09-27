@@ -4,7 +4,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import HistGradientBoostingClassifier
+from lightgbm import LGBMClassifier
 
 
 def basic_features(x):
@@ -14,11 +14,16 @@ def basic_features(x):
 def estimators():
     return {
         "logistic_regression": make_pipeline(StandardScaler(), LogisticRegression(max_iter=300,random_state=2026)),
-        "hist_gradient_boosting": HistGradientBoostingClassifier(max_iter=160,max_leaf_nodes=15,
-            learning_rate=.08,l2_regularization=2.,min_samples_leaf=40,early_stopping=False,random_state=2026),
-        "hist_gradient_boosting_text_only": make_pipeline(FunctionTransformer(basic_features),
-            HistGradientBoostingClassifier(max_iter=160,max_leaf_nodes=15,learning_rate=.08,
-                l2_regularization=2.,min_samples_leaf=40,early_stopping=False,random_state=2026)),
+        "lightgbm_15": LGBMClassifier(n_estimators=160, num_leaves=15, learning_rate=.08,
+            reg_lambda=2., min_child_samples=40, random_state=2026, n_jobs=1, verbosity=-1,
+            deterministic=True, force_col_wise=True),
+        "lightgbm_31": LGBMClassifier(n_estimators=240, num_leaves=31, learning_rate=.05,
+            reg_lambda=2., min_child_samples=40, random_state=2026, n_jobs=1, verbosity=-1,
+            deterministic=True, force_col_wise=True),
+        "lightgbm_text_only": make_pipeline(FunctionTransformer(basic_features),
+            LGBMClassifier(n_estimators=160, num_leaves=15, learning_rate=.08,
+                reg_lambda=2., min_child_samples=40, random_state=2026, n_jobs=1, verbosity=-1,
+                deterministic=True, force_col_wise=True)),
     }
 
 

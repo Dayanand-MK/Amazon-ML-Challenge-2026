@@ -93,7 +93,7 @@ def run(root,adopt=True):
                 'retained_true_pairs':retained,'lost_true_pairs':total-retained,'candidate_recall':retained/total,
                 'candidate_count':int(smask.sum()),'average_candidates_per_s1':float(smask.sum()/len(tids))})
         pd.concat([pd.read_csv(root/'experiments/blocking_results.csv'),pd.DataFrame(added)],ignore_index=True).to_csv(root/'experiments/blocking_results.csv',index=False)
-        experiment={'experiment_id':'E05','normalization':'same','blocking':'source-balanced top 80 per source; final top 24',
+        experiment={'experiment_id':'E06','normalization':'same','blocking':'source-balanced top 80 per source; final top 24',
             'features':len(bundle['feature_names']),**best,'notes':'Existing frozen model. Retrieval and threshold selected on tuning cohort only.'}
         pd.concat([pd.read_csv(root/'experiments/experiment_log.csv'),pd.DataFrame([experiment])],ignore_index=True).to_csv(root/'experiments/experiment_log.csv',index=False)
         pd.concat([pd.read_csv(root/'experiments/model_results.csv'),pd.DataFrame([{**best,'model':best['model']+'_balanced'}])],ignore_index=True).to_csv(root/'experiments/model_results.csv',index=False)

@@ -14,3 +14,4 @@ text-unidecode==1.3
 threadpoolctl==3.7.0
 tqdm==4.70.1
 tzdata==2026.4
+lightgbm==4.6.0

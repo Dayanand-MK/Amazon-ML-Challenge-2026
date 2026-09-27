@@ -28,6 +28,15 @@ class PipelineTests(unittest.TestCase):
         self.assertIn('CJK',detect_scripts('北京'))
         self.assertEqual(normalize_text('  X—Y__Z  '),'x y z')
 
+    def test_legacy_helpers_do_not_hard_filter_country(self):
+        import pandas as pd
+        from src.blocking import generate_candidates
+        left=pd.DataFrame([{'entity_id':'S1-1','country_block_key':'France','key':'zenith'}])
+        right=pd.DataFrame([{'entity_id':'S2-2','country_block_key':'unknown','key':'zenith'}])
+        result=generate_candidates(left,right,['country_block_key','key'])
+        self.assertEqual(len(result),1)
+        with self.assertRaises(ValueError):generate_candidates(left,right,['country_block_key'])
+
     def test_missing_does_not_match(self):
         f=pair_features(prepared(('S1-1','','','')),prepared(('S2-1','','','')))
         self.assertEqual(len(f),len(FEATURE_NAMES))
@@ -38,8 +47,32 @@ class PipelineTests(unittest.TestCase):
         m=metrics([1,0],[.9,.8],[0,1],[2,0],.5)
         self.assertEqual(m['candidate_recall'],.5)
         self.assertEqual(m['false_negatives'],1)
-        for key in ('precision','recall','F0.5'):self.assertEqual(m[key],.5)
+        for key in ('precision','recall','micro_F0.5'):self.assertEqual(m[key],.5)
+        self.assertAlmostEqual(m['F0.5'], 5/12)
         self.assertEqual(m['singleton_accuracy'],0)
+
+    def test_macro_gives_each_entity_equal_weight(self):
+        result=metrics([1]*9,[.9]*9,[0]*9,[9,1,0],.5)
+        self.assertAlmostEqual(result['F0.5'],2/3)
+        self.assertGreater(result['micro_F0.5'],result['F0.5'])
+        self.assertEqual(metrics([],[],[],[0,0],.5)['F0.5'],1)
+
+    def test_validator_rejects_invalid_outputs_and_preserves_opaque_ids(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            header=['entity_id','business_name','business_address','country']
+            write_tsv(root/'test_source1.tsv',header,[('S1-0001','','','')])
+            write_tsv(root/'test_source2.tsv',header,[('S2-0002','','','')])
+            write_tsv(root/'test_source3.tsv',header,[])
+            def check(matched,candidates):
+                write_tsv(root/'matching.tsv',['source1_entity_id','matched_entity_ids'],[('S1-0001',matched)])
+                write_tsv(root/'candidate.tsv',['source1_entity_id','candidate_entity_ids'],[('S1-0001',candidates)])
+                return validate(root/'matching.tsv',root/'candidate.tsv',root)
+            self.assertEqual(check('S2-0002','S2-0002')['local_integrity'],'PASS')
+            for matched,candidates in [('S2-2','S2-2'),('S1-0001','S1-0001'),('S2-0002',''),('','S2-0002,S2-0002')]:
+                with self.assertRaises(AssertionError):check(matched,candidates)
+            write_tsv(root/'candidate.tsv',['source1_entity_id','candidate_entity_ids'],[])
+            with self.assertRaises(AssertionError):validate(root/'matching.tsv',root/'candidate.tsv',root)
 
     def test_cross_country_retrieval_and_submission(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -58,12 +91,32 @@ class PipelineTests(unittest.TestCase):
             index.close()
             del index
             write_tsv(root/'matching.tsv',['source1_entity_id','matched_entity_ids'],[('S1-1','S2-2'),('S1-4','')])
-            write_tsv(root/'candidate.tsv',['source1_entity_id','target_entity_id'],[('S1-1','S2-2')])
+            write_tsv(root/'candidate.tsv',['source1_entity_id','candidate_entity_ids'],[('S1-1','S2-2'),('S1-4','')])
             result=validate(root/'matching.tsv',root/'candidate.tsv',root)
             self.assertEqual(result['local_integrity'],'PASS')
             self.assertEqual(result['empty_matches'],1)
             write_tsv(root/'matching.tsv',['source1_entity_id','matched_entity_ids'],[('S1-1','S2-999'),('S1-4','')])
             with self.assertRaises(AssertionError):validate(root/'matching.tsv',root/'candidate.tsv',root)
+
+    def test_official_validator_accepts_grouped_files_and_rejects_unknown_ids(self):
+        import subprocess, sys, os
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            header=['entity_id','business_name','business_address','country']
+            write_tsv(root/'test_source1.tsv',header,[('S1-0001','','','France'),('S1-0002','','','France')])
+            write_tsv(root/'test_source2.tsv',header,[('S2-0002','','','France')])
+            write_tsv(root/'test_source3.tsv',header,[])
+            write_tsv(root/'matching.tsv',['source1_entity_id','matched_entity_ids'],[('S1-0001','S2-0002'),('S1-0002','')])
+            write_tsv(root/'candidate.tsv',['source1_entity_id','candidate_entity_ids'],[('S1-0001','S2-0002'),('S1-0002','')])
+            command=[sys.executable,str(Path(__file__).resolve().parents[1]/'utils/validate_submission.py'),
+                '--matching',str(root/'matching.tsv'),'--candidate',str(root/'candidate.tsv'),
+                '--test-dir',str(root),'--check-ids']
+            env=dict(os.environ,PYTHONIOENCODING='utf-8')
+            result=subprocess.run(command,capture_output=True,text=True,encoding='utf-8',env=env)
+            self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+            self.assertNotIn('WARNING:',result.stdout)
+            write_tsv(root/'matching.tsv',['source1_entity_id','matched_entity_ids'],[('S1-0001','S2-9999'),('S1-0002','')])
+            self.assertEqual(subprocess.run(command,capture_output=True,env=env).returncode,1)
 
     def test_batched_inference_end_to_end(self):
         from src.inference import infer

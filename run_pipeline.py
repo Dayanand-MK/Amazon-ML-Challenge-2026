@@ -36,8 +36,8 @@ def main():
             from src.inference import infer
             infer(root,args.workers)
         elif stage=='validate':
-            from src.submission import validate
-            validate(root/'output/matching_results.tsv',root/'output/candidate_pairs.tsv',root/'dataset/test',root/'reports/submission_validation.json')
+            from src.submission import validate_all
+            validate_all(root)
         elif stage=='report':
             from src.reporting import report
             report(root)

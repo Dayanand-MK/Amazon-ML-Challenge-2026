@@ -1,0 +1,18 @@
+{
+  "official_validator_unchanged": true,
+  "official_validator_sha256": "f96f59934383a15095914f507620c078c474e8f9c60e864b2d051ed173a22dfc",
+  "final_model_license": "MIT",
+  "lightgbm_version": "4.6.0",
+  "lightgbm_license_files": [
+    "lightgbm-4.6.0.dist-info/licenses/LICENSE"
+  ],
+  "tree_count": 240,
+  "tree_node_count": 14640,
+  "tree_scalar_parameter_upper_bound": 468480,
+  "model_bytes": 848955,
+  "model_sha256": "5499a27a023d5cd727f04c18b3efcbec389fd8bee4629d10ec15e68d55e90c38",
+  "macro_metric_includes_singletons": true,
+  "test_inference": "RUNNING",
+  "official_validation": "PENDING",
+  "package": "PENDING"
+}
