@@ -1,0 +1,9 @@
+.venv/
+.uv-cache/
+__pycache__/
+*.pyc
+cache/
+dataset/
+output/
+models/*.pkl
+*_submission.zip

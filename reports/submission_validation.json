@@ -1,0 +1,9 @@
+{
+  "local_integrity": "PASS",
+  "official_validator": "NOT AVAILABLE",
+  "schema": "matching mirrors supplied training truth; candidates are long-form S1,target pairs",
+  "s1_rows": 1732544,
+  "candidate_pairs": 40106707,
+  "predicted_pairs": 4950360,
+  "empty_matches": 152975
+}
