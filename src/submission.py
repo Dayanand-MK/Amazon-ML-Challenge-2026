@@ -110,6 +110,7 @@ def package(root,team='Hacksmiths'):
     for path in (root/'tests').glob('*.py'):files.append((path,prefix+'tests/'+path.name))
     files.append((root/'models/final_model.pkl',prefix+'models/final_model.pkl'))
     files.append((root/'Documentation_template.md','Documentation_template.md'))
+    files.append((root/'Documentation_template.md',prefix+'Documentation_template.md'))
     files.append((root/'reports/submission_validation.json','submission_validation.json'))
     for folder in ('reports','experiments','notebooks'):
         for path in (root/folder).iterdir():

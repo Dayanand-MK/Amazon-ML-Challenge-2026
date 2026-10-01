@@ -12,7 +12,10 @@
   "model_bytes": 848955,
   "model_sha256": "5499a27a023d5cd727f04c18b3efcbec389fd8bee4629d10ec15e68d55e90c38",
   "macro_metric_includes_singletons": true,
-  "test_inference": "RUNNING",
-  "official_validation": "PENDING",
-  "package": "PENDING"
+  "test_inference": "COMPLETE",
+  "official_validation": "PASS",
+  "package": "Manifest and CRC verified; rebuilt archives are checked by the packager",
+  "leaderboard_file_confirmation": "User confirmed on 2026-10-01 that output/matching_results.tsv is the uploaded best-submission file",
+  "matching_results_sha256": "37720af841c29b76002fa35cf734bd66281f033496e2e169c8191efbc712dcb8",
+  "candidate_pairs_sha256": "a314ba2cfc9e6fec44cb89d35525c15388dc0bdfeb3af94ae9c61142b3b7fba8"
 }
